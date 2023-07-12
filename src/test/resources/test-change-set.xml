@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+<include file="db.changelog-master.xml" />
+    <changeSet id="add_sample_data" author="manturov">
+        <insert tableName="user_">
+            <column name="email">vazyan93@gmail.com</column>
+            <column name="password">$2a$10$/MItPFGhSuS83WqAtMQ13OYP5/v.pWocZlppM6g66GsTlVWVC197u</column>
+        </insert>
+
+        <insert tableName="user_role">
+            <column name="user_id">1</column>
+            <column name="role">USER</column>
+        </insert>
+
+        <insert tableName="account">
+            <column name="name">AccountName</column>
+            <column name="balance">12334533</column>
+            <column name="user_id">1</column>
+        </insert>
+
+        <insert tableName="account">
+            <column name="name">AccountName2</column>
+            <column name="balance">123</column>
+            <column name="user_id">1</column>
+        </insert>
+
+        <insert tableName="transaction_">
+            <column name="value_">32455</column>
+            <column name="created_date">2022-09-03 00:00:00</column>
+            <column name="from_account_id">2</column>
+            <column name="to_account_id">null</column>
+        </insert>
+
+        <insert tableName="transaction_">
+            <column name="value_">500</column>
+            <column name="created_date">2022-11-03 17:28:00</column>
+            <column name="from_account_id">2</column>
+            <column name="to_account_id">null</column>
+        </insert>
+
+        <insert tableName="transaction_">
+            <column name="value_">32455</column>
+            <column name="created_date">2022-09-03 00:00:00</column>
+            <column name="from_account_id">null</column>
+            <column name="to_account_id">2</column>
+        </insert>
+
+        <insert tableName="transaction_category">
+            <column name="category">TransCategoryName</column>
+            <column name="user_id">1</column>
+        </insert>
+
+        <insert tableName="transaction_category">
+            <column name="category">Product</column>
+            <column name="user_id">1</column>
+        </insert>
+
+        <insert tableName="category_to_transaction">
+            <column name="category_id">1</column>
+            <column name="transaction_id">1</column>
+        </insert>
+
+        <insert tableName="category_to_transaction">
+            <column name="category_id">2</column>
+            <column name="transaction_id">2</column>
+        </insert>
+
+        <insert tableName="category_to_transaction">
+            <column name="category_id">1</column>
+            <column name="transaction_id">3</column>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

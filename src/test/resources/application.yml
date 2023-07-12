@@ -1,0 +1,7 @@
+spring:
+  liquibase:
+    change-log: classpath:test-change-set.xml
+
+  h2:
+    console:
+      enabled: true

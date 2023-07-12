@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="init" author="vladimir">
+        <createTable tableName="user_">
+            <column name="id" type="SERIAL" autoIncrement="true">
+                <constraints unique="true" nullable="false" primaryKey="true"/>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="user_role">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="user_role" baseColumnNames="user_id" constraintName="user_role_user_id" referencedTableName="user_"
+                                 referencedColumnNames="id"/>
+
+        <createTable tableName="account">
+            <column name="id" type="SERIAL" autoIncrement="true">
+                <constraints unique="true" nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="balance" type="double">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="INT">
+                <constraints foreignKeyName="account_user_id_user_id" references="user_(id)" nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="transaction_">
+            <column name="id" type="SERIAL" autoIncrement="true">
+                <constraints unique="true" nullable="false" primaryKey="true"/>
+            </column>
+            <column name="value_" type="double">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="from_account_id" type="INT">
+                <constraints foreignKeyName="transaction_from_account_id_account_id" references="account(id)"
+                             nullable="true"/>
+            </column>
+            <column name="to_account_id" type="INT">
+                <constraints foreignKeyName="transaction_to_account_id_account_id" references="account(id)"
+                             nullable="true"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="transaction_category">
+            <column name="id" type="SERIAL" autoIncrement="true">
+                <constraints unique="true" nullable="false" primaryKey="true"/>
+            </column>
+            <column name="category" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="INT">
+                <constraints foreignKeyName="transaction_category_user_id_user_id" references="user_(id)"
+                             nullable="true"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="category_to_transaction">
+            <column name="category_id" type="INT">
+                <constraints foreignKeyName="category_to_transaction_category_id_transaction_category_id"
+                             references="transaction_category(id)" nullable="true"/>
+            </column>
+            <column name="transaction_id" type="INT">
+                <constraints foreignKeyName="category_to_transaction_transaction_id_transaction_id"
+                             references="transaction_(id)" nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

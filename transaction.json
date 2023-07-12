@@ -1,0 +1,15 @@
+{
+  "date": 1665737724809,
+  "in": {
+    "id": 123,
+    "name": "Tinkof"
+  },
+  "out": null,
+  "sum": 35.05,
+  "categories": [
+    {
+      "id": 1,
+      "name": "ЗП"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+.idea
+out
+*.iml
+/target/
+/s02/
+META-INF
+lib
